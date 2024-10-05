@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package transaction;
+
+service TransactionService {
+  rpc CreateTransaction (CreateTransactionRequest) returns (TransactionResponse);
+  rpc UpdateTransaction (UpdateTransactionRequest) returns (TransactionResponse);
+  rpc DeleteTransaction (DeleteTransactionRequest) returns (TransactionResponse);
+  rpc GetTransaction (GetTransactionRequest) returns (TransactionResponse);
+  rpc GetTransactions (Empty) returns (TransactionsListResponse);
+}
+
+message CreateTransactionRequest {
+  int32 customer_id = 1;
+  int32 food_id = 2;
+  int32 qty = 3;
+}
+
+message UpdateTransactionRequest {
+  int32 transaction_id = 1;
+  int32 customer_id = 2;
+  int32 food_id = 3;
+  int32 qty = 4;
+}
+
+message DeleteTransactionRequest {
+  int32 transaction_id = 1;
+}
+
+message GetTransactionRequest {
+  int32 transaction_id = 1;
+}
+
+message Empty {}
+
+message TransactionResponse {
+  int32 transaction_id = 1;
+  int32 customer_id = 2;
+  int32 food_id = 3;
+  int32 qty = 4;
+  int32 total_price = 5;
+  string transaction_date = 6;
+}
+
+message TransactionsListResponse {
+  repeated TransactionResponse transactions = 1;
+}
